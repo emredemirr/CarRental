@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using DataAccess.Abstract.EntityFramework;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -31,7 +33,7 @@ namespace DataAccess.Concrete.InMemory
             _iCarDal.Remove(carToDelete);
         }
 
-        public List<Car> GetAll()
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             return _iCarDal;
         }
