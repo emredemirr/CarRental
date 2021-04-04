@@ -13,7 +13,7 @@ namespace ConsoleUI
             //CarManagerTest();
             //ColorManagerTest();
             //BrandManagerTest();
-            CarDtoTest();
+            //CarDtoTest();
         }
 
         private static void CarDtoTest()
