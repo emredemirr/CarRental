@@ -16,6 +16,7 @@ namespace ConsoleUI
             //CarDtoTest();
             //UsersManagerTest();
             //CustomerManagerTest();
+            //RentalManagerTest();
         }
 
         private static void CarDtoTest()
@@ -23,7 +24,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             foreach (var car in carManager.GetCarDetails().Data)
             {
-                Console.WriteLine(car.CarId + "-" + car.CarName + "-" + car.BrandName + "-" + 
+                Console.WriteLine(car.CarId + "-" + car.CarName + "-" + car.BrandName + "-" +
                                   car.ColorName + "-" + car.DailyPrice);
             }
         }
@@ -45,7 +46,7 @@ namespace ConsoleUI
                 Console.WriteLine(brandGetAll.BrandId + "" + brandGetAll.BrandName);
             }
         }
-        
+
         private static void ColorManagerTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
@@ -59,19 +60,19 @@ namespace ConsoleUI
                 Console.WriteLine(color.ColorId + "/" + color.ColorName);
             }
         }
-        
+
         private static void CarManagerTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Car car = new Car() 
+            Car car = new Car()
             {
-                CarId = 6, 
-                CarName = "BMW", 
-                BrandId = 2, 
-                ColorId = 3, 
+                CarId = 6,
+                CarName = "BMW",
+                BrandId = 2,
+                ColorId = 3,
                 DailyPrice = 170,
-                Description = "Update Test", 
-                ModelYear = 2019 
+                Description = "Update Test",
+                ModelYear = 2019
             };
             carManager.Add(car);
             carManager.Delete(car);
@@ -87,7 +88,7 @@ namespace ConsoleUI
             UserManager userManager = new UserManager(new EfUsersDal());
             Users users = new Users()
             {
-                
+
             };
             userManager.Add(users);
 
@@ -128,8 +129,22 @@ namespace ConsoleUI
                 CustomerId = 3,
                 UserId = 3,
                 CompanyName = "Test."
+
             };
             customerManager.Update(customers3);
+        }
+
+        private static void RentalManagerTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalsDal());
+            Rentals rentals = new Rentals()
+            {
+                CarId = 1,
+                CustomerId = 3,
+                RentDate = new DateTime(2021, 4, 1),
+                ReturnDate = new DateTime(2021, 4, 10)
+            };
+            rentalManager.Add(rentals);
         }
     }
 }

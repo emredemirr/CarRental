@@ -19,8 +19,15 @@ namespace Business.Concrete
 
         public IResult Add(Rentals rentals)
         {
-            _rentalsDal.Add(rentals);
-            return new SuccessResult(Messages.CustomerAdded);
+            if (rentals.ReturnDate<=rentals.RentDate && rentals.ReturnDate == null)
+            {
+                return new ErrorResult(Messages.CarNameInvalid);
+            }
+            else
+            {
+                _rentalsDal.Add(rentals);
+                return new SuccessResult(Messages.CustomerAdded);
+            }
         }
 
         public IResult Delete(Rentals rentals)
