@@ -64,8 +64,19 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getcardetails")]
-        public IActionResult GetCarDetails()
+        [HttpGet("getcardetail")]
+        public IActionResult GetCarDetail(int id)
+        {
+            var result = _carService.GetCarDetail(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarsdetail")]
+        public IActionResult GetCarsDetail()
         {
             var result = _carService.GetCarDetails();
             if (result.Success)
@@ -74,6 +85,8 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        // kurmançi zane bro şlav keke çırdıke hewal engin demiroğ 
 
         [HttpGet("getcarsbybrandid")]
         public IActionResult GetCarsByBrandId(int id)

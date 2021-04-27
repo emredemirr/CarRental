@@ -33,5 +33,27 @@ namespace DataAccess.Concrete.EntityFramework
                              
             }
         }
+
+        public CarDetailsDto GetCarDetail(int id)
+        {
+            using (CarRentalContext context = new CarRentalContext())
+            {
+                var result = from car in context.Car
+                             join brand in context.Brand
+                             on car.BrandId equals brand.BrandId
+                             join color in context.Color
+                             on car.ColorId equals color.ColorId where car.CarId == id
+                             select new CarDetailsDto
+                             {
+                                 CarId = car.CarId,
+                                 CarName = car.CarName,
+                                 BrandName = brand.BrandName,
+                                 ColorName = color.ColorName,
+                                 DailyPrice = car.DailyPrice
+                             };
+
+                return result.FirstOrDefault();
+            }
+        }
     }
 }

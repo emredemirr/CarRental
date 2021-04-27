@@ -43,6 +43,11 @@ namespace Business.Concrete
             return new DataResult<List<Car>>(_carDal.GetAll(),true,"Araçlar listelendi.");
         }
 
+        public IDataResult<CarDetailsDto> GetCarDetail(int carId)
+        {
+            return new DataResult<CarDetailsDto>(_carDal.GetCarDetail(carId),true);
+        }
+
         public IDataResult<List<CarDetailsDto>> GetCarDetails()
         {
             return new DataResult<List<CarDetailsDto>> (_carDal.GetCarDetails(),true);
