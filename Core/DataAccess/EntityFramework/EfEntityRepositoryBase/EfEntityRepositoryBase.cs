@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Entities.Concrete;
+using System.Reflection;
+using Core.Entities;
 
 namespace Core.DataAccess.EntityFramework.EfEntityRepositoryBase
 {
@@ -60,5 +62,6 @@ namespace Core.DataAccess.EntityFramework.EfEntityRepositoryBase
                 return context.Set<TEntity>().SingleOrDefault(filter);
             }
         }
+
     }
 }
