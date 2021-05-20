@@ -86,7 +86,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        // kurmançi zane bro şlav keke çırdıke hewal engin demiroğ 
 
         [HttpGet("getcarsbybrandid")]
         public IActionResult GetCarsByBrandId(int id)

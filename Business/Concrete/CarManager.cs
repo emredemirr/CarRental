@@ -1,6 +1,7 @@
 ﻿using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -22,7 +23,10 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [SecuredOperation("")]
+
+         
+        [SecuredOperation("admin,car.add")]
+        [CacheRemoveAspect("ICarService.Get")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -31,38 +35,40 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
 
         }
-
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new DataResult<List<Car>>(_carDal.GetAll(), true, "Araçlar listelendi.");
         }
-
+        [CacheAspect]
         public IDataResult<CarDetailsDto> GetCarDetail(int carId)
         {
             return new DataResult<CarDetailsDto>(_carDal.GetCarDetail(carId), true);
         }
-
+        [CacheAspect]
         public IDataResult<List<CarDetailsDto>> GetCarDetails()
         {
             return new DataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(), true);
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             return new DataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == brandId), true);
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new DataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == colorId), true);
         }
 
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
